@@ -142,7 +142,9 @@ def drc(img, med, des_med):
 
 
 def load_img_and_preprocess(path, SIZE, rotate=False):
-    img = cv2.imread(path)                             
+    img = cv2.imread(path)
+    print(type(img))
+
     if img.ndim == 3:
       img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)                                 
     img = cv2.resize(img, (SIZE, SIZE))  

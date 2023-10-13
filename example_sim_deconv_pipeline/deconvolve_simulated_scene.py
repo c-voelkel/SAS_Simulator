@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import os
 import glob
 from sim_csas_package.utils import natural_keys, normalize
+import cv2
 
 if __name__ == '__main__':
     sim_config = 'config/simulation.ini'
