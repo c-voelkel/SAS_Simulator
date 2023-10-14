@@ -185,12 +185,31 @@ class RenderParameters:
 
         # Pack every projector position into an array
         for i in range(0, self.num_thetas):
+            # Convert the offset_amplitude to a tensor
+            offset_amplitude = 0.1
+            offset_amplitude = torch.tensor(offset_amplitude)
+
+            # Generate random offsets
+            random_offsets = torch.rand(360) * 2 * offset_amplitude - offset_amplitude
+
+            # Calculate the offset for both x and y coordinates
+            angle = torch.tensor(i)
+            offset_x = random_offsets * torch.cos(angle)
+            offset_y = random_offsets * torch.sin(angle)
+
+
             tx_pos = torch.tensor(
                 [self.r * math.cos(np.deg2rad(self.thetas[i])), self.r * math.sin(np.deg2rad(self.thetas[i])),
                  self.z_TX])
             rx_pos = torch.tensor(
                 [self.r * math.cos(np.deg2rad(self.thetas[i])), self.r * math.sin(np.deg2rad(self.thetas[i])),
                  self.z_RX])
+
+
+            #adding offset to transducer position
+            tx_pos[0] += offset_x[angle]
+            tx_pos[1] += offset_y[angle]
+
             trans.append(Transducer(tx_pos=tx_pos, rx_pos=rx_pos))
 
         self.num_proj = self.num_thetas

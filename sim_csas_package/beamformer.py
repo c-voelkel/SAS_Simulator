@@ -98,6 +98,7 @@ class Beamformer:
         T_wfm = 1 / self.RP.Fs
 
         for i, trans in enumerate(self.trans):
+
             #pdb.set_trace()
             dist1 = torch.sqrt(torch.sum((self.pixels - \
                 trans.tx_pos.unsqueeze(0).detach().cpu()) ** 2, 1))
