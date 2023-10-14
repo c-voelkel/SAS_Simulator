@@ -149,7 +149,7 @@ class INRRecon:
                     psnr_est = peak_signal_noise_ratio(normalize(gt_img),
                                                        normalize(deconv_scene))
                     ssim_est = structural_similarity(normalize(gt_img),
-                                                     normalize(deconv_scene))
+                                                     normalize(deconv_scene), data_range=1.0)
 
                     if LPIPS_metric:
                         gt = torch.from_numpy(self.norm(gt_img.squeeze()))[None, None,

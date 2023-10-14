@@ -54,6 +54,8 @@ class SimulateMeasurements:
             assert pix_dim % 2 == 0, "keep size of scene even so PSF is automatically odd"
 
             # define scene dimensions to mimic airsas scene
+
+            print("defining scene dimensions")
             RP.define_scene_dimensions(scene_dim_x=[sys['scene_dim_x'][0], sys['scene_dim_x'][1]],  # meters
                                        scene_dim_y=[sys['scene_dim_y'][0], sys['scene_dim_y'][1]],  # meters
                                        scene_dim_z=[sys['scene_dim_z'][0], sys['scene_dim_z'][1]],  # set z to 0
@@ -61,6 +63,7 @@ class SimulateMeasurements:
                                        pix_dim_bf=[pix_dim, pix_dim, 1])
 
             # Crop waveform will scale num samples to fit scene size
+            print("generating transmit signal")
             RP.generate_transmit_signal(crop_wfm=True)
 
             BF = Beamformer(RP=RP, interp='nearest', mp=False, r=100)
