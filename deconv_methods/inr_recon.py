@@ -1,7 +1,7 @@
 import torch
 import numpy as np
 from deconv_methods.models import MLP_FF2D_MLP, FourierFeaturesVector
-from sim_csas_package.utils import normalize, save_sas_plot, c2g, g2c
+from sim_csas_package.utils_no_torch import normalize, save_sas_plot, c2g, g2c
 import os
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 import lpips

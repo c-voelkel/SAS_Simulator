@@ -9,7 +9,7 @@ import numpy as np
 from deconv_methods.wiener_filter import WienerDeconv
 from deconv_methods.bremen_alg import BremenAlg
 from deconv_methods.dip_recon import DIPRecon
-from sim_csas_package.utils import save_sas_plot
+from sim_csas_package.utils_no_torch import save_sas_plot
 
 
 class DeconvMethods:

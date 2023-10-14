@@ -6,9 +6,9 @@ import os
 import sys
 sys.path.append('../')
 from sim_csas_package.render_parameters import RenderParameters
-from sim_csas_package.beamformer import Beamformer
+from sim_csas_package.beamformer_no_torch import Beamformer
 from sim_csas_package.waveform_processing import delay_waveforms
-from sim_csas_package.utils import c2g
+from sim_csas_package.utils_no_torch import c2g
 import torch
 
 """Method to remove the mean amplitude and phase response from time series"""

@@ -5,7 +5,7 @@ import scipy.signal
 import math
 from sim_csas_package.transducer import Transducer
 
-class RenderParameters:
+class RenderParameters_8:
     def __init__(self, **kwargs):
         self.Fs = kwargs.get('Fs', 100000) * 1.0
         self.num_samples = None # Computed under generateTransmitSignal()

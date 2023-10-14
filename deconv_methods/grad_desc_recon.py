@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from sim_csas_package.utils import grad_reg, TV, normalize, save_sas_plot, c2g, g2c
+from sim_csas_package.utils_no_torch import grad_reg, TV, normalize, save_sas_plot, c2g, g2c
 from skimage.metrics import peak_signal_noise_ratio, structural_similarity
 import os
 import lpips

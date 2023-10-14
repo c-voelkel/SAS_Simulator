@@ -2,9 +2,9 @@ import sys
 import numpy as np
 sys.path.append('../')
 from sim_csas_package.render_parameters import RenderParameters
-from sim_csas_package.beamformer import Beamformer
+from sim_csas_package.beamformer_no_torch import Beamformer
 from sim_csas_package.waveform_processing import replica_correlate_torch
-from sim_csas_package.utils import c2g, save_sas_plot
+from sim_csas_package.utils_no_torch import c2g, save_sas_plot
 from airsas_utils import remove_room, process_bf_files, gen_real_lfm, compute_psf
 import torch
 import os

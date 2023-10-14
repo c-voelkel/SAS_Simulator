@@ -1,6 +1,6 @@
 #import torch
 import numpy as np
-from sim_csas_package.waveform_processing import hilbert_torch
+from sim_csas_package.waveform_processing_no_torch import hilbert_torch
 import scipy.signal
 import math
 from sim_csas_package.transducer import Transducer
@@ -91,13 +91,13 @@ class RenderParameters:
 
         pixel_circle = pixel_grid[self.circle_indeces]
 
-        self.pixels_3D_bf = torch.from_numpy(pixel_circle)
+        self.pixels_3D_bf = pixel_circle #torch.from_numpy(pixel_circle)
         self.pixels_3D_sim = self.pixels_3D_bf
 
     def generate_transmit_signal(self,wfm=None, **kwargs):
 
       crop_wfm = kwargs.get('crop_wfm', False)
-      pixels_3D_sim = self.pixels_3D_sim.detach().cpu().numpy()
+      pixels_3D_sim = self.pixels_3D_sim #.detach().cpu().numpy()
 
       # Find min and max time of flight to edges of scene
       if crop_wfm:
@@ -114,8 +114,8 @@ class RenderParameters:
         max_dist = []
 
         for trans in self.trans:
-          tx = trans.tx_pos.detach().cpu().numpy()[None, ...]
-          rx = trans.rx_pos.detach().cpu().numpy()[None, ...]
+          tx = trans.tx_pos #.detach().cpu().numpy()[None, ...]
+          rx = trans.rx_pos #.detach().cpu().numpy()[None, ...]
 
           dist1 = np.sqrt(np.sum((edges - tx)**2, 1))
           dist2 = np.sqrt(np.sum((edges - rx)**2, 1))
@@ -159,12 +159,12 @@ class RenderParameters:
           sig[:len(wfm)] = wfm.squeeze()
           LFM = wfm.squeeze()
 
-      sig = torch.from_numpy(sig)
-
-      self.pulse_fft_kernel = torch.fft.fft(hilbert_torch(sig))
+      sig = sig #torch.from_numpy(sig)
+ #************
+      self.pulse_fft_kernel = np.fft.fft(hilbert_torch(sig)) #.fft.fft(hilbert_torch(sig))
 
       # Used to build received waveform
-      LFM = torch.from_numpy(LFM)
+      #LFM = torch.from_numpy(LFM)
       self.transmit_signal = LFM
       self.num_samples_transmit = len(LFM)
 
@@ -187,21 +187,22 @@ class RenderParameters:
         for i in range(0, self.num_thetas):
             # Convert the offset_amplitude to a tensor
             offset_amplitude = 0.5
-            offset_amplitude = torch.tensor(offset_amplitude)
+            offset_amplitude = np.array(offset_amplitude) #torch.tensor(offset_amplitude)
 
             # Generate random offsets
-            random_offsets = torch.rand(360) * 2 * offset_amplitude - offset_amplitude
+            #random_offsets = np.rand(360) * 2 * offset_amplitude - offset_amplitude
+            random_offsets = np.random.rand(360) * 2 * offset_amplitude - offset_amplitude
 
             # Calculate the offset for both x and y coordinates
-            angle = torch.tensor(i)
-            offset_x = random_offsets * torch.cos(angle)
-            offset_y = random_offsets * torch.sin(angle)
+            angle = i #torch.tensor(i)
+            offset_x = random_offsets * np.cos(angle)
+            offset_y = random_offsets * np.sin(angle)
 
 
-            tx_pos = torch.tensor(
+            tx_pos = np.array(
                 [self.r * math.cos(np.deg2rad(self.thetas[i])), self.r * math.sin(np.deg2rad(self.thetas[i])),
                  self.z_TX])
-            rx_pos = torch.tensor(
+            rx_pos = np.array(
                 [self.r * math.cos(np.deg2rad(self.thetas[i])), self.r * math.sin(np.deg2rad(self.thetas[i])),
                  self.z_RX])
 
