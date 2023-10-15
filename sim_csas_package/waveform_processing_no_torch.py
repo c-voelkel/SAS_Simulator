@@ -104,6 +104,7 @@ def delay_waveforms(RP, ps, amplitudes, noise=False, noise_std=.01, temps=None,
     w = 2 * math.pi * f
 
     for index in range(len(RP.trans)):
+        print("index", index)
         t1 = np.sqrt(np.sum((RP.trans[index].tx_pos[None, ...] - ps) ** 2, axis=1))
         t2 = np.sqrt(np.sum((RP.trans[index].rx_pos[None, ...] - ps) ** 2, axis=1))
 

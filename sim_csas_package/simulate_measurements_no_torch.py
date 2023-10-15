@@ -82,7 +82,7 @@ class SimulateMeasurements:
                 gt_scatterers = normalize(gt_scatterers)
 
                 save_sas_plot(c2g(gt_scatterers, RP.circle_indeces, pix_dim, pix_dim),
-                        os.path.join(self.save_img_dir, 'gt_' + str(img_index) + '.png'))
+                        os.path.join(self.save_img_dir, 'test_' + str(img_index) + '.png'))
 
                 np.save(os.path.join(self.save_data_dir, 'gt' \
                                      + str(img_index) + '.npy'), c2g(gt_scatterers, RP.circle_indeces, pix_dim, pix_dim))
